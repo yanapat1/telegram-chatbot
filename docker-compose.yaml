@@ -1,0 +1,6 @@
+services:
+  python:
+    image: main
+    entrypoint:
+      - python
+      - main.py

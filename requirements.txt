@@ -1,0 +1,8 @@
+python-telegram-bot
+google-generativeai
+pyyaml
+requests
+python-dotenv
+SQLAlchemy
+psycopg
+asyncpg
