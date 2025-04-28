@@ -1,12 +1,13 @@
-Get token from Gemini for free use with limit.
+## Get token from Gemini for free use with limit.
 https://aistudio.google.com/
-<br />
-Click the like below to create your Telegram bot and get token.
+
+
+## Click the like below to create your Telegram bot and get token.
 https://telegram.me/BotFather
-<br />
-Deploy Posgres database.
-<br />
-Add prompt.yaml
+
+## Deploy Posgres database.
+
+## Add prompt.yaml
 ```
 content: |
   You are ...
