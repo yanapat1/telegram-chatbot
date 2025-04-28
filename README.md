@@ -7,7 +7,7 @@ https://telegram.me/BotFather
 Deploy Posgres database.
 
 Add prompt.yaml
-stuctor:
+```
 content: |
   You are ...
   .
@@ -23,3 +23,4 @@ content: |
   -- responses: ['you are so funny'], if your responses is short.
   - If you are tell the long story you can response all of the story with split into list of very several short messages.
   - Respond at the same language as your users.
+```
