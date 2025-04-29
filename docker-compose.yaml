@@ -1,6 +1,29 @@
 services:
   python:
     image: main
+    container_name: my_tele_app
     entrypoint:
       - python
       - main.py
+    depends_on:
+    - dbbase
+
+  dbbase:
+    image: postgres:16
+    container_name: my_main_postgres
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_USER: pgadmin     
+      POSTGRES_PASSWORD: secret  
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata: {}
+
+networks:
+  mynetwork:
+    driver: bridge

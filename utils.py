@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, func, UUID, Boolean, text, DECIMAL
+from sqlalchemy import inspect, create_engine, Column, Integer, String, Text, DateTime, func, UUID, Boolean, text, DECIMAL
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -9,7 +9,7 @@ import uuid
 import os
 load_dotenv()
 
-def get_engine():
+def get_async_engine():
     dbname = os.getenv('DB_NAME')
     user = os.getenv('DB_USER')
     password = os.getenv('DB_PASS')
@@ -17,6 +17,17 @@ def get_engine():
     port = os.getenv('DB_PORT')
     DATABASE_URL = f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{dbname}"
     engine = create_async_engine(DATABASE_URL, echo=False)
+
+    return engine
+
+def get_engine():
+    dbname = os.getenv('DB_NAME')
+    user = os.getenv('DB_USER')
+    password = os.getenv('DB_PASS')
+    host = os.getenv('DB_HOST')
+    port = os.getenv('DB_PORT')
+    DATABASE_URL = f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{dbname}"
+    engine = create_engine(DATABASE_URL, echo=False)
 
     return engine
 
@@ -55,6 +66,7 @@ class UserSession(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()"))
     username = Column(UUID, nullable=False)
     telegram_id = Column(Text, nullable=True)
+    permission = Column(Boolean, nullable=False, server_default=text('FALSE'))
     session_id = Column(Integer, nullable=False)
 
 
@@ -62,7 +74,7 @@ def ASQLEexcute(func):
     @wraps(func)
     async def wrapper(*args, **kwargs):
         result_box = []
-        engine = get_engine()
+        engine = get_async_engine()
         async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
         command_box = await func(*args, **kwargs)
         async with async_session() as session:
@@ -81,6 +93,16 @@ def ASQLEexcute(func):
                 result_box.append(result)
             return result_box
     return wrapper
+
+def create_tables():
+    engine = get_engine()
+    inspector = inspect(engine)
+    if 'chat_history' not in inspector.get_table_names():
+        Base.metadata.create_all(engine, tables=[ChatHistory.__table__])
+    if 'siam_user' not in inspector.get_table_names():
+        Base.metadata.create_all(engine, tables=[Person.__table__])
+    if 'user_session' not in inspector.get_table_names():
+        Base.metadata.create_all(engine, tables=[UserSession.__table__])
 
 @ASQLEexcute
 async def user_register(username: str,

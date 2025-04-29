@@ -5,4 +5,5 @@ requests
 python-dotenv
 SQLAlchemy
 psycopg
+psycopg2-binary
 asyncpg

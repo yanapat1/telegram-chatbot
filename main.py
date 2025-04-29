@@ -22,7 +22,8 @@ from utils import (
     update_session,
     change_session,
     get_chat_history,
-    save_message
+    save_message,
+    create_tables
 )
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
@@ -281,5 +282,7 @@ if __name__ == "__main__":
     # chat = ChatGoogleGenerativeAI(model="gemini-1.5-flash-8b", temperature=1)
 
     chat = ModelGemini(token=gemini_token, model_name='gemini-1.5-flash')
-
+    create_tables()
     main()
+
+# TODO Auto deploy posgres
