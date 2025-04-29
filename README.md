@@ -1,6 +1,7 @@
+# Quick start
+
 ## Get token from Gemini for free use with limit.
 https://aistudio.google.com/
-
 
 ## Click the link below to create your Telegram bot and get token.
 https://telegram.me/BotFather
@@ -32,3 +33,6 @@ content: |
   - If you are tell the long story you can response all of the story with split into list of very several short messages.
   - Respond at the same language as your users.
 ```
+
+## Docker compose
+```docker compose up -d```
