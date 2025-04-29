@@ -5,7 +5,14 @@ https://aistudio.google.com/
 ## Click the link below to create your Telegram bot and get token.
 https://telegram.me/BotFather
 
-## Deploy Posgres database.
+## Create file .env and add:
+- TELEGRAM_BOT_TOKEN:
+- GEMINI_TOKEN:
+- DB_NAME:
+- DB_USER:
+- DB_PASS:
+- DB_HOST:
+- DB_PORT:
 
 ## Add prompt.yaml
 ```
