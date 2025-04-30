@@ -6,13 +6,15 @@ services:
       - python
       - main.py
     depends_on:
-    - dbbase
+      - dbbase
+    networks:
+      - mynetwork
 
   dbbase:
     image: postgres:16
     container_name: my_main_postgres
     ports:
-      - "5433:5433"
+      - "5433:5432"
     environment:
       POSTGRES_USER: pgadmin     
       POSTGRES_PASSWORD: secret  
@@ -20,6 +22,8 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - mynetwork
 
 volumes:
   pgdata: {}
