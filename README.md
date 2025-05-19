@@ -7,6 +7,7 @@ https://aistudio.google.com/
 https://telegram.me/BotFather
 
 ## Create file .env and add:
+```
 - TELEGRAM_BOT_TOKEN:
 - GEMINI_TOKEN:
 - DB_NAME:
@@ -14,6 +15,7 @@ https://telegram.me/BotFather
 - DB_PASS:
 - DB_HOST:
 - DB_PORT:
+```
 
 ## Add prompt.yaml
 ```
